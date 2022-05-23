@@ -11,6 +11,9 @@ webpack*
 rollup*
 .babelrc.js
 
+#development
+/build
+
 #demo
 /example
 index.html
