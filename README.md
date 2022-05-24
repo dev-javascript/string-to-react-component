@@ -31,7 +31,6 @@ Also You need to load `@babel/standalone` in the browser :
 ## Basic Example
 
 ```js
-import React from 'react';
 import StringToReactComponent from 'string-to-react-component';
 function App() {
   return (
@@ -52,14 +51,35 @@ function App() {
 }
 ```
 
+### Notes
+
+- The given code inside the string should be a function.
+
+- The given code is executed in the global scope, so imported objects from `react` package including `useState`, `useEffect`, ... are not accessible inside it and you should get them from `React` global variable :
+
+```js
+import {useState} from 'react';
+import StringToReactComponent from 'string-to-react-component';
+function App() {
+  return (
+    <StringToReactComponent>
+      {`()=>{
+         console.log(typeof useState); // undefined
+         console.log(typeof React.useState); // object
+
+         ...
+
+       }`}
+    </StringToReactComponent>
+  );
+}
+```
+
 ## Using Unknown Elements
 
 ```js
-import React from 'react';
 import StringToReactComponent from 'string-to-react-component';
-function MyComponent() {
-  return <p>My Component</p>;
-}
+import MyComponent from 'path to MyComponent';
 function App() {
   return (
     <StringToReactComponent MyComponent={MyComponent}>
