@@ -1,12 +1,11 @@
 class Ctx {
-  constructor(template) {
-    this._temp = "";
-    this._parentTemp = `return @temp;`;
+  constructor() {
+    this._temp = '';
+    this._parentTemp = `"use strict";return @temp;`;
     this._defaultCom = null;
     this._com = null;
     this._b = window.Babel;
-    this._babelpresets = ["react"];
-    this.updateTemplate(template);
+    this._babelpresets = ['react'];
   }
   _transpile() {
     return this._b.transform(this._temp, {
@@ -14,12 +13,10 @@ class Ctx {
     }).code;
   }
   _generateCom() {
-    this._com = this._temp
-      ? Function(this._parentTemp.replace("@temp", this._transpile()))()
-      : this._defaultCom;
+    this._com = this._temp ? Function(this._parentTemp.replace('@temp', this._transpile()))() : this._defaultCom;
   }
   updateTemplate(template) {
-    template = template || "";
+    template = template || '';
     if (template !== this._temp) {
       this._temp = template;
       this._generateCom();
