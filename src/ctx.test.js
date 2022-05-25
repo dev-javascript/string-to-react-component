@@ -1,5 +1,4 @@
 import Ctx from './ctx.js';
-import {TestScheduler} from 'jest';
 beforeEach(() => {
   window.Babel = {};
 });
@@ -53,19 +52,21 @@ describe('methods : ', () => {
   test('_validateCodeInsideTheTemp method', () => {
     expect.assertions(3);
     const ins = new Ctx();
-    try {
+    {
       ins._com = () => {};
       ins._validateCodeInsideTheTemp();
       expect(1).toBe(1);
-    } catch (er) {}
-    try {
-      class c {}
+    }
+    {
+      class c {
+        constructor() {}
+      }
       ins._com = c;
       ins._validateCodeInsideTheTemp();
       expect(1).toBe(1);
-    } catch (er) {}
+    }
     try {
-      ins._com = {};
+      ins._com = '';
       ins._validateCodeInsideTheTemp();
     } catch (er) {
       expect(er.message).toBe('code inside the passed string into string-to-react-component, should be a function');

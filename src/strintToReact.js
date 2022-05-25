@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useRef} from 'react';
 window.React = window.React || React;
 function StringToReactComponent({getCtx}, props) {
