@@ -65,7 +65,7 @@ function App() {
     <StringToReactComponent>
       {`()=>{
          console.log(typeof useState); // undefined
-         console.log(typeof React.useState); // object
+         console.log(typeof React.useState); // function
 
          ...
 
