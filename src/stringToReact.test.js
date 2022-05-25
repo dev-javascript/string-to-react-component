@@ -11,6 +11,7 @@ beforeAll(() => {
   document.body.appendChild(container);
 });
 beforeEach(() => {
+  window.Babel = window.Babel || {};
   renderApp = (temp, deps, rerender, temp2) => {
     let secondRender = false;
     const StrintToReactCom = StrintToReact.bind(undefined, deps);
@@ -30,6 +31,7 @@ beforeEach(() => {
   };
 });
 afterEach(() => {
+  delete window.Babel;
   unmountComponentAtNode(container);
   container.innerHTML = '';
   renderApp = null;
