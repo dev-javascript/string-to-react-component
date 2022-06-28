@@ -11,6 +11,7 @@ Create React component from string
 - [Installation](#installation)
 - [Basic Example](#basic-example)
 - [Using Unknown Elements](#using-unknown-elements)
+- [Caveats](#caveats)
 - [Test](#test)
 - [License](#license)
 
@@ -18,14 +19,16 @@ Create React component from string
 
 ## Installation
 
-```js
-$ npm install string-to-react-component --save
-```
-
-Also You need to load `@babel/standalone` in the browser :
+First You need to load `@babel/standalone` in the browser :
 
 ```js
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+```
+
+Then install `string-to-react-component` package
+
+```js
+$ npm install string-to-react-component --save
 ```
 
 ## Basic Example
@@ -55,7 +58,7 @@ function App() {
 
 - The given code inside the string should be a function.
 
-- The given code is executed in the global scope, so imported objects from `react` package including `useState`, `useEffect`, ... are not accessible inside it and you should get them from `React` global variable :
+- The code inside the string is executed in the global scope, so imported objects from `react` package including `useState`, `useEffect`, ... are not accessible inside it and you should get them from `React` global variable :
 
 ```js
 import {useState} from 'react';
@@ -91,6 +94,12 @@ function App() {
   );
 }
 ```
+
+## Caveats
+
+This plugin does not use `eval` function, however, suffers from security and might expose you to XSS attacks
+
+To prevent XSS attacks, You should sanitize user input before storing it.
 
 ## Test
 
