@@ -31,8 +31,8 @@
     "deploy": "gh-pages -d demo"
   },
   "peerDependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.14",
@@ -72,14 +72,12 @@
   ],
   "keywords": [
     "react",
-    "convert-string-to-react",
-    "string-to-react",
-    "string-to-jsx",
-    "convert-string-to-jsx",
-    "transpile-jsx",
-    "compile-jsx",
-    "string-to-react-component",
-    "react-component"
+    "component",
+    "string",
+    "element",
+    "jsx",
+    "converter",
+    "parser"
   ],
   "license": "MIT",
   "directories": {
