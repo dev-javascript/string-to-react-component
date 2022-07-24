@@ -5,7 +5,16 @@ const requirePolyfills = process.env.INCLUDE_POLYFILLS;
 const modules = output == null ? false : output;
 const options = {
   presets: [['@babel/env', {loose: true, modules}], '@babel/react'],
-  plugins: ['@babel/plugin-transform-react-jsx'],
+  plugins: [
+    '@babel/plugin-transform-react-jsx',
+    [
+      'transform-react-remove-prop-types',
+      {
+        mode: 'remove',
+        ignoreFilenames: ['node_modules'],
+      },
+    ],
+  ],
   env: {
     test: {
       // extra configuration for process.env.NODE_ENV === 'test'
