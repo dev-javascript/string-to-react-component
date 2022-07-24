@@ -22,11 +22,7 @@ describe('constructor :', () => {
   });
   test('check _parentTemp property', () => {
     const ins = new Ctx();
-    expect(ins._parentTemp).toBe(`"use strict";return @temp;`);
-  });
-  test('check _babelpresets property', () => {
-    const ins = new Ctx();
-    expect(ins._babelpresets).toEqual(['react']);
+    expect(ins._parentTemp).toBe(`"use strict";\nreturn @temp;`);
   });
 });
 describe('methods : ', () => {
