@@ -69,7 +69,9 @@
   "files": [
     "dist",
     "lib",
-    "src"
+    "src",
+    "!*.test.js",
+    "!*.test.js.snap"
   ],
   "keywords": [
     "react",
