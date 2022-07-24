@@ -11,6 +11,10 @@ Create React component from string
 - [Installation](#installation)
 - [Basic Example](#basic-example)
 - [Using Unknown Elements](#using-unknown-elements)
+- [props](#props)
+  - [data](#data)
+  - [babelOptions](#babelOptions)
+- [Generating source map](#generating-source-map)
 - [Caveats](#caveats)
 - [Test](#test)
 - [License](#license)
@@ -82,13 +86,56 @@ function App() {
 
 ```js
 import StringToReactComponent from 'string-to-react-component';
-import MyComponent from 'path to MyComponent';
+import MyFirstComponent from 'path to MyFirstComponent';
+import MySecondComponent from 'path to MySecondComponent';
 function App() {
   return (
-    <StringToReactComponent MyComponent={MyComponent}>
+    <StringToReactComponent data={{MyFirstComponent, MySecondComponent}}>
       {`(props)=>{
-         const {MyComponent}=props;
-         return (<MyComponent/>);
+         const {MyFirstComponent, MySecondComponent}=props;
+         return (<>
+          <MyFirstComponent/>
+          <MySecondComponent/>
+         </>);
+       }`}
+    </StringToReactComponent>
+  );
+}
+```
+
+## props
+
+### data
+
+- type : object
+- not required
+- `data` object is passed to the component(which is generated from the string) as props
+
+### babelOptions
+
+- type : object
+- not required
+- See the full option list [here](https://babeljs.io/docs/en/options)
+
+## Generating source map
+
+example :
+
+```js
+import StringToReactComponent from 'string-to-react-component';
+function App() {
+  return (
+    <StringToReactComponent babelOptions={{filename: 'counter.js', sourceMaps: 'inline'}}>
+      {`(props)=>{
+         const {useState}=React;
+         const [counter,setCounter]=useState(0);
+         const increase=()=>{
+           setCounter(counter+1);
+         };
+         return (<>
+           <button onClick={increase}>+</button>
+           <span>{'counter : '+ counter}</span>
+           </>);
        }`}
     </StringToReactComponent>
   );
