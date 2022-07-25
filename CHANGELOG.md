@@ -1,3 +1,11 @@
+## version 3.0.0
+
+- `data` prop should be used for passing unknown elements to the component
+
+- adding `babelOptions` prop
+
+- update peerDependencies versions
+
 ## version 2.0.0
 
 - upgrade react and react-dom peerDependencies to v18.2.0
