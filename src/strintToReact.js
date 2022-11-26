@@ -1,11 +1,8 @@
-import React, {useRef} from 'react';
+import React, {useRef } from 'react';
 import PropTypes from 'prop-types';
-window.React = window.React || React;
 function StringToReactComponent({getCtx}, props) {
   const ref = useRef(null);
-  if (!ref.current) {
-    ref.current = getCtx();
-  }
+  ref.current = ref.current || getCtx(React);
   const babelOptions = props.babelOptions || {};
   const GeneratedComponent = ref.current.updateTemplate(props.children, babelOptions).getComponent();
   const data = props.data || {};

@@ -1,4 +1,4 @@
 import Ctx from './ctx.js';
 import StringToReact from './strintToReact.js';
-const getCtx = () => new Ctx();
+const getCtx = (options) => new Ctx(options);
 export default StringToReact.bind(null, {getCtx});

@@ -1,8 +1,9 @@
 class Ctx {
-  constructor() {
+  constructor(React) {
     this._temp = '';
     this._parentTemp = `"use strict";\nreturn @temp;`;
     this._com = null;
+    window.React = window.React || React;
     if (!(Object.prototype.hasOwnProperty.call(window, 'Babel') && typeof window.Babel === 'object')) {
       throw new Error(`string-to-react-component package needs @babel/standalone for working correctly.
       you should load @babel/standalone in the browser.`);
