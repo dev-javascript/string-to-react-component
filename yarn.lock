@@ -5926,12 +5926,14 @@
     "randombytes" "^2.0.5"
     "safe-buffer" "^5.1.0"
 
-"react-dom@file:../ssr/ssr/node_modules/react-dom":
-  "resolved" "file:../ssr/ssr/node_modules/react-dom"
-  "version" "18.2.0"
+"react-dom@file:../test/node_modules/react-dom":
+  "resolved" "file:../test/node_modules/react-dom"
+  "version" "16.9.0"
   dependencies:
     "loose-envify" "^1.1.0"
-    "scheduler" "^0.23.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
+    "scheduler" "^0.15.0"
 
 "react-is@^16.13.1", "react-is@^16.8.4", "react-is@^16.9.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
@@ -5953,11 +5955,13 @@
     "react-is" "^16.9.0"
     "scheduler" "^0.15.0"
 
-"react@^16.0.0", "react@file:../ssr/ssr/node_modules/react":
-  "resolved" "file:../ssr/ssr/node_modules/react"
-  "version" "18.2.0"
+"react@^16.0.0", "react@file:../test/node_modules/react":
+  "resolved" "file:../test/node_modules/react"
+  "version" "16.9.0"
   dependencies:
     "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
 
 "read-pkg-up@^7.0.1":
   "integrity" "sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg=="

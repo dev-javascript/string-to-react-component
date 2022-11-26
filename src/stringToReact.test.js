@@ -12,6 +12,7 @@ beforeAll(() => {
 });
 beforeEach(() => {
   window.Babel = window.Babel || {};
+  window.React=window.React||React;
   renderApp = (temp, deps, rerender, temp2) => {
     let secondRender = false;
     const StrintToReactCom = StrintToReact.bind(undefined, deps);
@@ -44,7 +45,7 @@ describe('rendering : ', () => {
   test('generated component from string should be updated when props.children is changed', () => {
     let _ctx, _ctx2;
     const getCtx = function () {
-        _ctx = new Ctx();
+        _ctx = new Ctx(React);
         _ctx.getComponent = jest.fn(() => _ctx._com);
         _ctx._transpile = jest.fn(
           () => `() => /*#__PURE__*/React.createElement("p", {
@@ -54,7 +55,7 @@ describe('rendering : ', () => {
         return _ctx;
       },
       getCtx2 = function () {
-        _ctx2 = new Ctx();
+        _ctx2 = new Ctx(React);
         _ctx2.getComponent = jest.fn(() => _ctx2._com);
         _ctx2._transpile = jest.fn(
           () => `() => /*#__PURE__*/React.createElement("p", {
@@ -73,7 +74,7 @@ describe('rendering : ', () => {
   test('it should call updateTemplate method with props.children as a parameter', () => {
     let _ctx;
     const getCtx = function () {
-      _ctx = new Ctx();
+      _ctx = new Ctx(React);
       const updateTemplate = _ctx.updateTemplate;
       _ctx.updateTemplate = jest.fn((temp) => updateTemplate.call(_ctx, temp));
       _ctx._transpile = jest.fn(
@@ -88,7 +89,10 @@ describe('rendering : ', () => {
   });
 });
 describe('React global variable', () => {
-  test('this package should set the React global variable', () => {
+  test('The constructor should set the React global variable', () => {
+    window.React=undefined;
+    new Ctx(React);
     expect(window.React).toEqual(React);
+    window.React=React;
   });
 });
