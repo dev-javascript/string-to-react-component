@@ -1,4 +1,4 @@
-# string-to-react-component
+  # string-to-react-component
 
 Create React component from string
 
@@ -14,7 +14,6 @@ Create React component from string
 - [props](#props)
   - [data](#data)
   - [babelOptions](#babelOptions)
-- [Generating source map](#generating-source-map)
 - [Caveats](#caveats)
 - [Test](#test)
 - [License](#license)
@@ -116,31 +115,39 @@ function App() {
 - type : object
 - not required
 - See the full option list [here](https://babeljs.io/docs/en/options)
+- examples :
+    * using source map :
+       ```js
+        <StringToReactComponent babelOptions={{filename: 'counter.js', sourceMaps: 'inline'}}>
+         {`(props)=>{
+            const {useState}=React;
+            const [counter,setCounter]=useState(0);
+            const increase=()=>{
+              setCounter(counter+1);
+            };
+            return (<>
+              <button onClick={increase}>+</button>
+              <span>{'counter : '+ counter}</span>
+              </>);
+          }`}
+        </StringToReactComponent>
+       ```
+    * using typescript :
+        ```js
+         <StringToReactComponent babelOptions={{ filename: 'counter.ts',presets: [["typescript", { allExtensions: true, isTSX: true }]] }}>
+           {`()=>{
+             const [counter,setCounter]=React.useState<number>(0);
+             const increase=()=>{
+               setCounter(counter+1);
+             };
+             return (<>
+               <button onClick={increase}>+</button>
+               <span>{'counter : '+ counter}</span>
+               </>);
+            }`}
+         </StringToReactComponent>
+        ```
 
-## Generating source map
-
-example :
-
-```js
-import StringToReactComponent from 'string-to-react-component';
-function App() {
-  return (
-    <StringToReactComponent babelOptions={{filename: 'counter.js', sourceMaps: 'inline'}}>
-      {`(props)=>{
-         const {useState}=React;
-         const [counter,setCounter]=useState(0);
-         const increase=()=>{
-           setCounter(counter+1);
-         };
-         return (<>
-           <button onClick={increase}>+</button>
-           <span>{'counter : '+ counter}</span>
-           </>);
-       }`}
-    </StringToReactComponent>
-  );
-}
-```
 
 ## Caveats
 
