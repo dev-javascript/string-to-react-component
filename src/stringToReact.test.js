@@ -12,7 +12,7 @@ beforeAll(() => {
 });
 beforeEach(() => {
   window.Babel = window.Babel || {};
-  window.React=window.React||React;
+  window.React = window.React || React;
   renderApp = (temp, deps, rerender, temp2) => {
     let secondRender = false;
     const StrintToReactCom = StrintToReact.bind(undefined, deps);
@@ -90,9 +90,9 @@ describe('rendering : ', () => {
 });
 describe('React global variable', () => {
   test('The constructor should set the React global variable', () => {
-    window.React=undefined;
+    window.React = undefined;
     new Ctx(React);
     expect(window.React).toEqual(React);
-    window.React=React;
+    window.React = React;
   });
 });

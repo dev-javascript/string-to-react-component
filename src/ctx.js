@@ -1,14 +1,15 @@
 class Ctx {
-  constructor(React) {
+  constructor(Babel, React) {
     this._temp = '';
     this._parentTemp = `"use strict";\nreturn @temp;`;
     this._com = null;
     window.React = window.React || React;
-    if (!(Object.prototype.hasOwnProperty.call(window, 'Babel') && typeof window.Babel === 'object')) {
-      throw new Error(`string-to-react-component package needs @babel/standalone for working correctly.
-      you should load @babel/standalone in the browser.`);
+    if (!Babel && !window.Babel) {
+      throw new Error(
+        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires "^7.23.10" )`,
+      );
     }
-    this._b = window.Babel;
+    this._b = Babel || window.Babel;
   }
   _checkBabelOptions(babelOptions) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {

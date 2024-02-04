@@ -22,16 +22,24 @@ Create React component from string
 
 ## Installation
 
-First You need to load `@babel/standalone` in the browser :
-
-```js
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-```
-
-Then install `string-to-react-component` package
-
 ```js
 $ npm install string-to-react-component --save
+
+or
+
+$ yarn add string-to-react-component
+```
+
+Also you should install `@babel/standalone` package because `string-to-react-component` has a peer dependency of `@babel/standalone`
+
+```js
+$ npm install @babel/standalone --save
+
+or
+ 
+//load `@babel/standalone` in the browser
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 ```
 
 ## Basic Example

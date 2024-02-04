@@ -1,4 +1,4 @@
-import {terser} from 'rollup-plugin-terser';
+import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 const requirePolyfills = process.env.INCLUDE_POLYFILLS;
@@ -13,11 +13,12 @@ export default {
     globals: {
       'react-dom': 'ReactDOM',
       react: 'React',
+      '@babel/standalone': 'Babel'
     },
     sourcemap: true,
   },
-  plugins: [terser(), commonjs(), nodeResolve({preferBuiltins: false})],
+  plugins: [terser(), commonjs(), nodeResolve({ preferBuiltins: false })],
   external: function (id) {
-    return /prop-types$|react$|react-dom$|.test.js$|.js.snap$|.css$/g.test(id);
+    return /prop-types$|react$|\@babel\/standalone$|react-dom$|.test.js$|.js.snap$|.css$/g.test(id);
   },
 };

@@ -1,6 +1,7 @@
-import React, {useRef } from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
-function StringToReactComponent({getCtx}, props) {
+function StringToReactComponent(deps, props) {
+  const {getCtx} = deps;
   const ref = useRef(null);
   ref.current = ref.current || getCtx(React);
   const babelOptions = props.babelOptions || {};
@@ -11,5 +12,6 @@ function StringToReactComponent({getCtx}, props) {
 StringToReactComponent.propTypes /* remove-proptypes */ = {
   data: PropTypes.object,
   babelOptions: PropTypes.object,
+  children: PropTypes.string,
 };
 export default StringToReactComponent;
