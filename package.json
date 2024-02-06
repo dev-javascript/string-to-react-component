@@ -16,10 +16,8 @@
   },
   "scripts": {
     "watch": "set NODE_OPTIONS=--openssl-legacy-provider & cross-env BABEL_OUTPUT=umd INCLUDE_POLYFILLS=true webpack --config webpack.config.js --env=development --watch",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider & npm-run-all clean:* --parallel build:lib:*  & npm-run-all --parallel build:umd:*",
-    "build:umd:dev": "cross-env BABEL_OUTPUT=umd INCLUDE_POLYFILLS=true webpack --config webpack.config.js --env=development",
-    "build:umd:prod": "rollup -c",
-    "build:umd:prod-pf": "cross-env INCLUDE_POLYFILLS=true rollup -c",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider & npm-run-all clean:* --parallel build:lib:* & npm run build:dist",
+    "build:dist": "rollup -c",
     "build:lib:cjs": "cross-env BABEL_OUTPUT=cjs babel src/ --out-dir lib/cjs/ --ignore **/__tests__,**/__mocks__,**/*.test.js,**/*.js.snap",
     "build:lib:esm": "babel src/ --out-dir lib/esm/ --ignore **/__tests__,**/__mocks__,**/*.test.js,**/*.js.snap",
     "build:lib:esm-pf": "cross-env INCLUDE_POLYFILLS=true babel src/ --out-dir lib/esm-including-polyfills/ --ignore **/__tests__,**/__mocks__,**/*.test.js,**/*.js.snap",
@@ -68,11 +66,17 @@
     "webpack-cli": "^3.3.12"
   },
   "files": [
+    "plugins",
     "dist",
+    "flow-typed",
     "lib",
+    "style",
+    "theme",
+    "themes",
     "src",
     "!*.test.js",
-    "!*.test.js.snap"
+    "!*.test.js.snap",
+    "index.d.ts"
   ],
   "keywords": [
     "react",

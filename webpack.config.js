@@ -10,10 +10,10 @@ module.exports = (env) => {
     entry: './src/index.js',
     output: {
       filename: isProduction ? 'stringToReactComponent.umd.min.js' : 'stringToReactComponent.umd.js',
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'build'),
       library,
       libraryTarget: 'umd',
-      publicPath: '/dist/',
+      publicPath: '/build/',
       umdNamedDefine: true,
     },
     devtool: isProduction ? 'source-map' : 'inline-source-map',
@@ -26,6 +26,10 @@ module.exports = (env) => {
           use: {
             loader: 'babel-loader',
           },
+        },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
         },
       ],
     },

@@ -6,24 +6,37 @@ const name = pkg.name
   .split('-')
   .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
   .join('');
-const requirePolyfills = process.env.INCLUDE_POLYFILLS;
-export default {
-  input: requirePolyfills ? 'lib/esm-including-polyfills/index.js' : 'lib/esm/index.js',
-  output: {
-    file: requirePolyfills
-      ? 'dist/stringToReactComponent.including-polyfills.umd.min.js'
-      : 'dist/stringToReactComponent.umd.min.js',
-    format: 'umd',
-    name,
-    globals: {
-      'react-dom': 'ReactDOM',
-      react: 'React',
-      '@babel/standalone': 'Babel',
-    },
-    sourcemap: true,
+const Config = ({en, inputPath = '', outputFile = 'stringToReactComponent', pf = false}) => {
+    var pfName = pf ? '.including-polyfills' : '';
+    return {
+      input: `lib/${pf ? 'esm-including-polyfills' : 'esm'}/${inputPath}index.js`,
+      output: {
+        file: `dist/${outputFile}${pfName}.umd${en === 'dev' ? '' : '.min'}.js`,
+        format: 'umd',
+        name,
+        globals: {
+          'react-dom': 'ReactDOM',
+          react: 'React',
+          '@babel/standalone': 'Babel',
+        },
+        sourcemap: true,
+      },
+      plugins: (function () {
+        const _plugins = [nodeResolve({preferBuiltins: false}), commonjs()];
+        if (en === 'prod') {
+          _plugins.push(terser());
+        }
+        return _plugins;
+      })(),
+      external: function (id) {
+        return /prop-types$|react$|\@babel\/standalone$|react-dom$|.test.js$|.js.snap$|.css$/g.test(id);
+      },
+    };
   },
-  plugins: [terser(), commonjs(), nodeResolve({preferBuiltins: false})],
-  external: function (id) {
-    return /prop-types$|react$|\@babel\/standalone$|react-dom$|.test.js$|.js.snap$|.css$/g.test(id);
-  },
-};
+  ConfigFactory = (op) => [
+    Config({en: 'dev', ...op}),
+    Config({en: 'prod', ...op}),
+    Config({en: 'dev', pf: true, ...op}),
+    Config({en: 'prod', pf: true, ...op}),
+  ];
+export default ConfigFactory();
