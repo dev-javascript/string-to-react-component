@@ -1,4 +1,4 @@
-  # string-to-react-component
+# string-to-react-component
 
 Create React component from string
 
@@ -30,16 +30,17 @@ or
 $ yarn add string-to-react-component
 ```
 
-Also you should install `@babel/standalone` package because `string-to-react-component` has a peer dependency of `@babel/standalone`
+`string-to-react-component` has a peer dependency of `@babel/standalone`, then you should install `@babel/standalone` package :
 
 ```js
 $ npm install @babel/standalone --save
+```
 
-or
- 
-//load `@babel/standalone` in the browser
+### CDN Links
 
+```js
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/string-to-react-component@3.0.4/dist/stringToReactComponent.umd.min.js"></script>
 ```
 
 ## Basic Example
@@ -124,38 +125,38 @@ function App() {
 - not required
 - See the full option list [here](https://babeljs.io/docs/en/options)
 - examples :
-    * using source map :
-       ```js
-        <StringToReactComponent babelOptions={{filename: 'counter.js', sourceMaps: 'inline'}}>
-         {`(props)=>{
-            const {useState}=React;
-            const [counter,setCounter]=useState(0);
-            const increase=()=>{
-              setCounter(counter+1);
-            };
-            return (<>
-              <button onClick={increase}>+</button>
-              <span>{'counter : '+ counter}</span>
-              </>);
-          }`}
-        </StringToReactComponent>
-       ```
-    * using typescript :
-        ```js
-         <StringToReactComponent babelOptions={{ filename: 'counter.ts',presets: [["typescript", { allExtensions: true, isTSX: true }]] }}>
-           {`()=>{
-             const [counter,setCounter]=React.useState<number>(0);
-             const increase=()=>{
-               setCounter(counter+1);
-             };
-             return (<>
-               <button onClick={increase}>+</button>
-               <span>{'counter : '+ counter}</span>
-               </>);
-            }`}
-         </StringToReactComponent>
-        ```
-
+  - using source map :
+    ```js
+    <StringToReactComponent babelOptions={{filename: 'counter.js', sourceMaps: 'inline'}}>
+      {`(props)=>{
+         const {useState}=React;
+         const [counter,setCounter]=useState(0);
+         const increase=()=>{
+           setCounter(counter+1);
+         };
+         return (<>
+           <button onClick={increase}>+</button>
+           <span>{'counter : '+ counter}</span>
+           </>);
+       }`}
+    </StringToReactComponent>
+    ```
+  - using typescript :
+    ```js
+    <StringToReactComponent
+      babelOptions={{filename: 'counter.ts', presets: [['typescript', {allExtensions: true, isTSX: true}]]}}>
+      {`()=>{
+         const [counter,setCounter]=React.useState<number>(0);
+         const increase=()=>{
+           setCounter(counter+1);
+         };
+         return (<>
+           <button onClick={increase}>+</button>
+           <span>{'counter : '+ counter}</span>
+           </>);
+        }`}
+    </StringToReactComponent>
+    ```
 
 ## Caveats
 
