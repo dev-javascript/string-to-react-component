@@ -1,6 +1,9 @@
 const path = require('path');
 const pkg = require('./package.json');
-const libraryName = pkg.name;
+const library = pkg.name
+  .split('-')
+  .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+  .join('');
 module.exports = (env) => {
   const isProduction = env === 'production';
   return {
@@ -8,7 +11,7 @@ module.exports = (env) => {
     output: {
       filename: isProduction ? 'stringToReactComponent.umd.min.js' : 'stringToReactComponent.umd.js',
       path: path.resolve(__dirname, 'dist'),
-      library: libraryName,
+      library,
       libraryTarget: 'umd',
       publicPath: '/dist/',
       umdNamedDefine: true,
@@ -44,6 +47,7 @@ module.exports = (env) => {
         amd: 'ReactDOM',
         root: 'ReactDOM',
       },
+      '@babel/standalone': 'Babel',
     },
   };
 };
