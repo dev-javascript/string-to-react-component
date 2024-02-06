@@ -1,5 +1,6 @@
+import React from 'react';
 import Ctx from './ctx.js';
-import babel from '@babel/standalone';
+import * as Babel from '@babel/standalone';
 import StringToReact from './strintToReact.js';
-const getCtx = (options) => new Ctx(babel, options);
-export default StringToReact.bind(null, {getCtx: getCtx});
+const getCtx = (React, Babel) => new Ctx(React, Babel);
+export default StringToReact.bind(null, {getCtx: getCtx, Babel: Babel, react: React});

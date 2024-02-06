@@ -5998,12 +5998,14 @@ randomfill@^1.0.3:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
 
-"react-dom@file:D:/projects/romak/FRONT_FRAMEWORK/node_modules/react-dom":
-  version "18.2.0"
-  resolved "file:D:/projects/romak/FRONT_FRAMEWORK/node_modules/react-dom"
+"react-dom@file:../react-dyn-tabs-example/node_modules/react-dom":
+  version "16.9.0"
+  resolved "file:../react-dyn-tabs-example/node_modules/react-dom"
   dependencies:
     loose-envify "^1.1.0"
-    scheduler "^0.23.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.15.0"
 
 react-is@^16.13.1, react-is@^16.8.4, react-is@^16.9.0:
   version "16.13.1"
@@ -6025,11 +6027,13 @@ react-test-renderer@16.9.0:
     react-is "^16.9.0"
     scheduler "^0.15.0"
 
-react@^16.0.0, "react@file:D:/projects/romak/FRONT_FRAMEWORK/node_modules/react":
-  version "18.2.0"
-  resolved "file:D:/projects/romak/FRONT_FRAMEWORK/node_modules/react"
+react@^16.0.0, "react@file:../react-dyn-tabs-example/node_modules/react":
+  version "16.9.0"
+  resolved "file:../react-dyn-tabs-example/node_modules/react"
   dependencies:
     loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
 
 read-pkg-up@^7.0.1:
   version "7.0.1"

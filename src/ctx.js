@@ -1,15 +1,15 @@
 class Ctx {
-  constructor(Babel, React) {
+  constructor(React, Babel) {
     this._temp = '';
     this._parentTemp = `"use strict";\nreturn @temp;`;
     this._com = null;
     window.React = window.React || React;
-    if (!Babel && !window.Babel) {
+    if (!Babel) {
       throw new Error(
         `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires "^7.23.10" )`,
       );
     }
-    this._b = Babel || window.Babel;
+    this._getBabel = () => Babel;
   }
   _checkBabelOptions(babelOptions) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {
@@ -30,7 +30,7 @@ class Ctx {
   _transpile(babelOptions) {
     // make sure react presets is registered in babelOptions
     this._checkBabelOptions(babelOptions);
-    const resultObj = this._b.transform(this._temp, babelOptions);
+    const resultObj = this._getBabel().transform(this._temp, babelOptions);
     const filename = babelOptions.filename;
     let code = resultObj.code;
     if (filename) {
