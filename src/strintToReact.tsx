@@ -1,8 +1,8 @@
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import PropTypes from 'prop-types';
-function StringToReactComponent(deps, props) {
+function StringToReactComponent(deps: any, props: any) {
   const {getCtx, Babel, react} = deps;
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   ref.current = ref.current || getCtx(react, Babel);
   const babelOptions = props.babelOptions || {};
   const GeneratedComponent = ref.current.updateTemplate(props.children, babelOptions).getComponent();

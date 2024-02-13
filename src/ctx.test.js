@@ -1,4 +1,4 @@
-import Ctx from './ctx.js';
+import Ctx from './ctx';
 beforeEach(() => {
   window.Babel = {};
 });

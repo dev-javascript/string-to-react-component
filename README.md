@@ -23,17 +23,11 @@ Create React component from string
 ## Installation
 
 ```js
-$ npm install string-to-react-component --save
+# with npm
+$ npm install string-to-react-component @babel/standalone --save
 
-or
-
-$ yarn add string-to-react-component
-```
-
-`string-to-react-component` has a peer dependency of `@babel/standalone`, then you should install `@babel/standalone` package :
-
-```js
-$ npm install @babel/standalone --save
+# with yarn
+yarn add string-to-react-component @babel/standalone
 ```
 
 ### CDN Links

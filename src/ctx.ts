@@ -1,8 +1,10 @@
+import { type TBabel } from './index.d';
 class Ctx {
-  constructor(React, Babel) {
-    this._temp = '';
-    this._parentTemp = `"use strict";\nreturn @temp;`;
-    this._com = null;
+  _temp: string = '';
+  _parentTemp: string = `"use strict";\nreturn @temp;`;
+  _com: Function | null = null;
+  _getBabel: () => TBabel;
+  constructor(React: object, Babel: TBabel) {
     window.React = window.React || React;
     if (!Babel) {
       throw new Error(
@@ -11,7 +13,7 @@ class Ctx {
     }
     this._getBabel = () => Babel;
   }
-  _checkBabelOptions(babelOptions) {
+  _checkBabelOptions(babelOptions: any) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {
       throw new Error(`babelOptions prop of string-to-react-component element should be an object.`);
     }
@@ -27,7 +29,7 @@ class Ctx {
       }
     }
   }
-  _transpile(babelOptions) {
+  _transpile(babelOptions: any): string {
     // make sure react presets is registered in babelOptions
     this._checkBabelOptions(babelOptions);
     const resultObj = this._getBabel().transform(this._temp, babelOptions);
@@ -36,9 +38,9 @@ class Ctx {
     if (filename) {
       code = resultObj.code + `\n//# sourceURL=${filename}`;
     }
-    return code;
+    return code || 'null';
   }
-  _generateCom(babelOptions) {
+  _generateCom(babelOptions: any) {
     this._com = Function(this._parentTemp.replace('@temp', this._transpile(babelOptions)))();
     this._validateCodeInsideTheTemp();
   }
@@ -47,7 +49,7 @@ class Ctx {
       throw new Error(`code inside the passed string into string-to-react-component, should be a function`);
     }
   }
-  _validateTemplate(temp) {
+  _validateTemplate(temp: any) {
     if (typeof temp !== 'string') {
       throw new Error(`passed child into string-to-react-component element should b a string`);
     }
@@ -55,7 +57,7 @@ class Ctx {
       throw new Error(`passed string into string-to-react-component element can not be empty`);
     }
   }
-  updateTemplate(template, babelOptions) {
+  updateTemplate(template: any, babelOptions: any) {
     this._validateTemplate(template);
     if (template !== this._temp) {
       this._temp = template;

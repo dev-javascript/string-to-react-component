@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "allowJs": true,
+    "skipLibCheck": true,
+
+    "allowSyntheticDefaultImports": true,
+    // Ensure that .d.ts files are created by tsc, but not .js files
+    "declaration": true,
+    "emitDeclarationOnly": true,
+
+    /* Bundler mode */
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    /* Advanced Options */
+    "resolveJsonModule": true /* Include modules imported with '.json' extension */,
+    // Ensure that Babel can safely transpile files in the TypeScript project
+    "isolatedModules": true,
+    //"noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"],
+}
