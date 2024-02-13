@@ -16,13 +16,6 @@ const options = {
     ],
   ],
   plugins: [
-    [
-      '@babel/plugin-transform-typescript',
-      {
-        isTSX: true,
-        allExtensions: true,
-      },
-    ],
     '@babel/plugin-transform-react-jsx',
     [
       'transform-react-remove-prop-types',
@@ -35,7 +28,7 @@ const options = {
   env: {
     test: {
       // extra configuration for process.env.NODE_ENV === 'test'
-      presets: ['@babel/env', '@babel/preset-typescript'], // overwrite env-config from above with transpiled module syntax
+      presets: ['@babel/env'], // overwrite env-config from above with transpiled module syntax
     },
   },
 };
