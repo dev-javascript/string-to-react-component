@@ -2,7 +2,10 @@
   "name": "string-to-react-component",
   "version": "3.0.2",
   "private": false,
-  "author": "dev-javascript",
+  "author": {
+    "name": "dev-javascript",
+    "email": "javascript.code.dev@gmail.com"
+  },
   "description": "Create React component from string",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
