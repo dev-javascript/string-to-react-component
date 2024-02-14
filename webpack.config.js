@@ -7,7 +7,7 @@ const library = pkg.name
 module.exports = (env) => {
   const isProduction = env === 'production';
   return {
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
       filename: isProduction ? 'stringToReactComponent.umd.min.js' : 'stringToReactComponent.umd.js',
       path: path.resolve(__dirname, 'build'),
@@ -21,7 +21,7 @@ module.exports = (env) => {
     module: {
       rules: [
         {
-          test: /\.m?js$/,
+          test: /\.(js|jsx|tsx|ts)$/,
           exclude: /(node_modules|bower_components)/,
           use: {
             loader: 'babel-loader',
@@ -34,6 +34,7 @@ module.exports = (env) => {
       ],
     },
     resolve: {
+      extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
       alias: {
         assets: path.resolve(__dirname, 'assets'),
       },
