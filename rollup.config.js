@@ -14,6 +14,16 @@ const Config = ({en, inputPath = '', outputFile = 'stringToReactComponent', pf =
         file: `dist/${outputFile}${pfName}.umd${en === 'dev' ? '' : '.min'}.js`,
         format: 'umd',
         name,
+        banner:
+          '' +
+          `/**
+  * ${pkg.name} - ${pkg.description}
+  *
+  * @version v${pkg.version}
+  * @homepage ${pkg.homepage}
+  * @author ${pkg.author.name} ${pkg.author.email}
+  * @license ${pkg.license}
+  */`,
         globals: {
           'react-dom': 'ReactDOM',
           react: 'React',
