@@ -15,16 +15,7 @@ const options = {
       },
     ],
   ],
-  plugins: [
-    '@babel/plugin-transform-react-jsx',
-    [
-      'transform-react-remove-prop-types',
-      {
-        mode: 'remove',
-        ignoreFilenames: ['node_modules'],
-      },
-    ],
-  ],
+  plugins: ['@babel/plugin-transform-react-jsx'],
   env: {
     test: {
       // extra configuration for process.env.NODE_ENV === 'test'

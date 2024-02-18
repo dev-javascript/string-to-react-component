@@ -1,10 +1,14 @@
-import { type TBabel } from './index.d';
-class Ctx {
+import type {TransformOptions} from '@babel/core';
+import type {TBabel, TReact, IStringToReactApi} from './index.d';
+import React, {FC, PropsWithChildren} from 'react';
+class Ctx implements IStringToReactApi {
   _temp: string = '';
   _parentTemp: string = `"use strict";\nreturn @temp;`;
-  _com: Function | null = null;
+  _com: FC<PropsWithChildren<{}>> = function () {
+    return null;
+  };
   _getBabel: () => TBabel;
-  constructor(React: object, Babel: TBabel) {
+  constructor(React: TReact, Babel: TBabel) {
     window.React = window.React || React;
     if (!Babel) {
       throw new Error(
@@ -13,7 +17,7 @@ class Ctx {
     }
     this._getBabel = () => Babel;
   }
-  _checkBabelOptions(babelOptions: any) {
+  _checkBabelOptions(babelOptions: TransformOptions) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {
       throw new Error(`babelOptions prop of string-to-react-component element should be an object.`);
     }
@@ -21,7 +25,7 @@ class Ctx {
       babelOptions.presets = ['react'];
     } else {
       //check if babelOptions.presets is not type of Array
-      if (!(typeof babelOptions.presets === 'object' && babelOptions.presets.constructor == Array)) {
+      if (!(typeof babelOptions.presets === 'object' && babelOptions.presets?.constructor == Array)) {
         throw new Error(`string-to-react-component Error : presets property of babelOptions prop should be an array`);
       }
       if (babelOptions.presets.indexOf('react') === -1) {
@@ -29,7 +33,7 @@ class Ctx {
       }
     }
   }
-  _transpile(babelOptions: any): string {
+  _transpile(babelOptions: TransformOptions): string {
     // make sure react presets is registered in babelOptions
     this._checkBabelOptions(babelOptions);
     const resultObj = this._getBabel().transform(this._temp, babelOptions);
@@ -57,7 +61,7 @@ class Ctx {
       throw new Error(`passed string into string-to-react-component element can not be empty`);
     }
   }
-  updateTemplate(template: any, babelOptions: any) {
+  updateTemplate(template: string, babelOptions: TransformOptions): IStringToReactApi {
     this._validateTemplate(template);
     if (template !== this._temp) {
       this._temp = template;
@@ -65,7 +69,7 @@ class Ctx {
     }
     return this;
   }
-  getComponent() {
+  getComponent(): FC<PropsWithChildren<{}>> {
     return this._com;
   }
 }
