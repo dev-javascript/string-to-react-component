@@ -34,7 +34,7 @@ yarn add string-to-react-component @babel/standalone
 
 ```js
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script src="https://unpkg.com/string-to-react-component@3.0.4/dist/stringToReactComponent.umd.min.js"></script>
+<script src="https://unpkg.com/string-to-react-component@3.1.0/dist/stringToReactComponent.umd.min.js"></script>
 ```
 
 ## Basic Example
@@ -64,18 +64,18 @@ function App() {
 
 - The given code inside the string should be a function.
 
-- The code inside the string is executed in the global scope, so imported objects from `react` package including `useState`, `useEffect`, ... are not accessible inside it and you should get them from `React` global variable :
+- The code inside the string is executed in the global scope, so imported objects from `react` package including `useState`, `useEffect`, ... are not accessible inside it and you can get them from `React` global variable or pass them as props to the component :
 
 ```js
 import {useState} from 'react';
 import StringToReactComponent from 'string-to-react-component';
 function App() {
   return (
-    <StringToReactComponent>
-      {`()=>{
+    <StringToReactComponent data={{useState}}>
+      {`(props)=>{
          console.log(typeof useState); // undefined
          console.log(typeof React.useState); // function
-
+         console.log(typeof props.useState); // function
          ...
 
        }`}
