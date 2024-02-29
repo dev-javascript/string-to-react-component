@@ -1,6 +1,6 @@
 import type {TransformOptions} from '@babel/core';
 import type {TBabel, TReact, IStringToReactApi} from './index.d';
-import React, {FC, PropsWithChildren} from 'react';
+import {FC, PropsWithChildren} from 'react';
 class Ctx implements IStringToReactApi {
   _temp: string = '';
   _parentTemp: string = `"use strict";\nreturn @temp;`;
@@ -9,7 +9,9 @@ class Ctx implements IStringToReactApi {
   };
   _getBabel: () => TBabel;
   constructor(React: TReact, Babel: TBabel) {
-    window.React = window.React || React;
+    if (typeof window === 'object') {
+      window.React = window.React || React;
+    }
     if (!Babel) {
       throw new Error(
         `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires "^7.23.10" )`,

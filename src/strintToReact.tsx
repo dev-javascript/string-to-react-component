@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import type {StringToReactComponentProps, IStringToReactApi, TBabel, TReact} from './index.d';
 function StringToReactComponent(
   deps: {getCtx: (react: TReact, Babel: TBabel) => IStringToReactApi; react: TReact; Babel: TBabel},
