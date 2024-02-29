@@ -8,6 +8,7 @@ example/node_modules
 
 # testing
 /coverage
+/sandbox
 
 # production
 /build

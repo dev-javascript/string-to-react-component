@@ -1,16 +1,19 @@
 const path = require('path');
 const pkg = require('./package.json');
-const libraryName = pkg.name;
+const library = pkg.name
+  .split('-')
+  .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+  .join('');
 module.exports = (env) => {
   const isProduction = env === 'production';
   return {
-    entry: './src/index.js',
+    entry: './src/index.ts',
     output: {
       filename: isProduction ? 'stringToReactComponent.umd.min.js' : 'stringToReactComponent.umd.js',
-      path: path.resolve(__dirname, 'dist'),
-      library: libraryName,
+      path: path.resolve(__dirname, 'build'),
+      library,
       libraryTarget: 'umd',
-      publicPath: '/dist/',
+      publicPath: '/build/',
       umdNamedDefine: true,
     },
     devtool: isProduction ? 'source-map' : 'inline-source-map',
@@ -18,15 +21,20 @@ module.exports = (env) => {
     module: {
       rules: [
         {
-          test: /\.m?js$/,
+          test: /\.(js|jsx|tsx|ts)$/,
           exclude: /(node_modules|bower_components)/,
           use: {
             loader: 'babel-loader',
           },
         },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
       ],
     },
     resolve: {
+      extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
       alias: {
         assets: path.resolve(__dirname, 'assets'),
       },
@@ -44,6 +52,7 @@ module.exports = (env) => {
         amd: 'ReactDOM',
         root: 'ReactDOM',
       },
+      '@babel/standalone': 'Babel',
     },
   };
 };

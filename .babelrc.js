@@ -4,17 +4,18 @@ const output = process.env.BABEL_OUTPUT;
 const requirePolyfills = process.env.INCLUDE_POLYFILLS;
 const modules = output == null ? false : output;
 const options = {
-  presets: [['@babel/env', {loose: true, modules}], '@babel/react'],
-  plugins: [
-    '@babel/plugin-transform-react-jsx',
+  presets: [
+    ['@babel/env', {loose: true, modules}],
+    '@babel/react',
     [
-      'transform-react-remove-prop-types',
+      '@babel/preset-typescript',
       {
-        mode: 'remove',
-        ignoreFilenames: ['node_modules'],
+        isTSX: true,
+        allExtensions: true,
       },
     ],
   ],
+  plugins: ['@babel/plugin-transform-react-jsx'],
   env: {
     test: {
       // extra configuration for process.env.NODE_ENV === 'test'

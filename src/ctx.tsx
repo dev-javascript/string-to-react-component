@@ -1,16 +1,25 @@
-class Ctx {
-  constructor(React) {
-    this._temp = '';
-    this._parentTemp = `"use strict";\nreturn @temp;`;
-    this._com = null;
-    window.React = window.React || React;
-    if (!(Object.prototype.hasOwnProperty.call(window, 'Babel') && typeof window.Babel === 'object')) {
-      throw new Error(`string-to-react-component package needs @babel/standalone for working correctly.
-      you should load @babel/standalone in the browser.`);
+import type {TransformOptions} from '@babel/core';
+import type {TBabel, TReact, IStringToReactApi} from './index.d';
+import {FC, PropsWithChildren} from 'react';
+class Ctx implements IStringToReactApi {
+  _temp: string = '';
+  _parentTemp: string = `"use strict";\nreturn @temp;`;
+  _com: FC<PropsWithChildren<{}>> = function () {
+    return null;
+  };
+  _getBabel: () => TBabel;
+  constructor(React: TReact, Babel: TBabel) {
+    if (typeof window === 'object') {
+      window.React = window.React || React;
     }
-    this._b = window.Babel;
+    if (!Babel) {
+      throw new Error(
+        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires "^7.23.10" )`,
+      );
+    }
+    this._getBabel = () => Babel;
   }
-  _checkBabelOptions(babelOptions) {
+  _checkBabelOptions(babelOptions: TransformOptions) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {
       throw new Error(`babelOptions prop of string-to-react-component element should be an object.`);
     }
@@ -18,7 +27,7 @@ class Ctx {
       babelOptions.presets = ['react'];
     } else {
       //check if babelOptions.presets is not type of Array
-      if (!(typeof babelOptions.presets === 'object' && babelOptions.presets.constructor == Array)) {
+      if (!(typeof babelOptions.presets === 'object' && babelOptions.presets?.constructor == Array)) {
         throw new Error(`string-to-react-component Error : presets property of babelOptions prop should be an array`);
       }
       if (babelOptions.presets.indexOf('react') === -1) {
@@ -26,18 +35,18 @@ class Ctx {
       }
     }
   }
-  _transpile(babelOptions) {
+  _transpile(babelOptions: TransformOptions): string {
     // make sure react presets is registered in babelOptions
     this._checkBabelOptions(babelOptions);
-    const resultObj = this._b.transform(this._temp, babelOptions);
+    const resultObj = this._getBabel().transform(this._temp, babelOptions);
     const filename = babelOptions.filename;
     let code = resultObj.code;
     if (filename) {
       code = resultObj.code + `\n//# sourceURL=${filename}`;
     }
-    return code;
+    return code || 'null';
   }
-  _generateCom(babelOptions) {
+  _generateCom(babelOptions: any) {
     this._com = Function(this._parentTemp.replace('@temp', this._transpile(babelOptions)))();
     this._validateCodeInsideTheTemp();
   }
@@ -46,7 +55,7 @@ class Ctx {
       throw new Error(`code inside the passed string into string-to-react-component, should be a function`);
     }
   }
-  _validateTemplate(temp) {
+  _validateTemplate(temp: any) {
     if (typeof temp !== 'string') {
       throw new Error(`passed child into string-to-react-component element should b a string`);
     }
@@ -54,7 +63,7 @@ class Ctx {
       throw new Error(`passed string into string-to-react-component element can not be empty`);
     }
   }
-  updateTemplate(template, babelOptions) {
+  updateTemplate(template: string, babelOptions: TransformOptions): IStringToReactApi {
     this._validateTemplate(template);
     if (template !== this._temp) {
       this._temp = template;
@@ -62,7 +71,7 @@ class Ctx {
     }
     return this;
   }
-  getComponent() {
+  getComponent(): FC<PropsWithChildren<{}>> {
     return this._com;
   }
 }
