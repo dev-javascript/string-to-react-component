@@ -1,5 +1,5 @@
 import type {TransformOptions} from '@babel/core';
-import type {TBabel, TReact, IStringToReactApi} from './index.d';
+import type {TBabel, TReact, IStringToReactApi} from './types.d';
 import {FC, PropsWithChildren} from 'react';
 class Ctx implements IStringToReactApi {
   _temp: string = '';
