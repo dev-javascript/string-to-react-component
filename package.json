@@ -27,7 +27,7 @@
     "build:lib:esm-pf": "cross-env INCLUDE_POLYFILLS=true babel src/ --out-dir lib/esm-including-polyfills/ --extensions .ts,.tsx --ignore **/__tests__,**/__mocks__,**/*.test.js,**/*.js.snap,**/*.d.ts",
     "clean:lib": "rimraf lib",
     "clean:dist": "rimraf dist",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "jest",
     "lint": "eslint src",
     "deploy": "gh-pages -d demo"
@@ -101,6 +101,7 @@
   "jest": {
     "setupFilesAfterEnv": [
       "jest-extended"
-    ]
+    ],
+    "collectCoverage": true
   }
 }

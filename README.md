@@ -1,8 +1,8 @@
+[![Test coverage](https://codecov.io/gh/dev-javascript/string-to-react-component/graph/badge.svg?token=GT1LU074L2)](https://codecov.io/gh/dev-javascript/string-to-react-component) [![NPM version](http://img.shields.io/npm/v/string-to-react-component.svg?style=flat-square)](http://npmjs.org/package/string-to-react-component) [![node](https://img.shields.io/badge/node.js-%3E=_8.0-green.svg?style=flat-square)](http://nodejs.org/download/) [![React](https://img.shields.io/badge/React-%3E=_16.8.0-green.svg?style=flat-square)](https://react.dev/) [![License](http://img.shields.io/npm/l/string-to-react-component.svg?style=flat-square)](LICENSE) [![npm download](https://img.shields.io/npm/dm/string-to-react-component.svg?style=flat-square)](https://npmjs.org/package/string-to-react-component) [![Build Status](https://travis-ci.org/ly-components/string-to-react-component.png)](https://travis-ci.org/ly-components/string-to-react-component)
+
 # string-to-react-component
 
 Create React component from string
-
-> _Support react >= `v16.8.0`_
 
 ## Table of Contents
 
