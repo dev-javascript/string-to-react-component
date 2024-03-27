@@ -34,7 +34,7 @@ yarn add string-to-react-component @babel/standalone
 
 ```js
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script src="https://unpkg.com/string-to-react-component@3.1.0/dist/stringToReactComponent.umd.min.js"></script>
+<script src="https://unpkg.com/string-to-react-component@latest/dist/stringToReactComponent.umd.min.js"></script>
 ```
 
 ## Basic Example
