@@ -1,3 +1,9 @@
+## version 3.1.0
+
+- Adding `@babel/standalone` package into `peerDependencies` list
+
+- using typescript
+
 ## version 3.0.0
 
 - `data` prop should be used for passing unknown elements to the component
