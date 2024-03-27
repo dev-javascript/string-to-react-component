@@ -33,7 +33,7 @@
     "deploy": "gh-pages -d demo"
   },
   "peerDependencies": {
-    "@babel/standalone": "^7.23.10",
+    "@babel/standalone": "^7.24.3",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
@@ -70,7 +70,8 @@
     "rollup": "^2.41.0",
     "rollup-plugin-terser": "7.0.2",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "@babel/standalone": "^7.24.3"
   },
   "files": [
     "plugins",
