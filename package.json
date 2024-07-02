@@ -71,7 +71,7 @@
     "rollup-plugin-terser": "7.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "@babel/standalone": "^7.24.3"
+    "@babel/standalone": "^7.24.7"
   },
   "files": [
     "plugins",
