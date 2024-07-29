@@ -2,12 +2,23 @@
   "name": "string-to-react-component",
   "version": "3.1.0",
   "private": false,
+  "description": "Create React component from string",
+  "keywords": [
+    "react",
+    "component",
+    "string",
+    "element",
+    "jsx",
+    "converter",
+    "parser",
+    "string-to-react",
+    "convert-string-to-react-component"
+  ],
   "author": {
     "name": "dev-javascript",
     "email": "javascript.code.dev@gmail.com"
   },
   "types": "./index.d.ts",
-  "description": "Create React component from string",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
   "repository": {
@@ -76,28 +87,6 @@
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4"
   },
-  "files": [
-    "plugins",
-    "dist",
-    "flow-typed",
-    "lib",
-    "style",
-    "theme",
-    "themes",
-    "src",
-    "!*.test.js",
-    "!*.test.js.snap",
-    "index.d.ts"
-  ],
-  "keywords": [
-    "react",
-    "component",
-    "string",
-    "element",
-    "jsx",
-    "converter",
-    "parser"
-  ],
   "license": "MIT",
   "directories": {
     "lib": "lib"
