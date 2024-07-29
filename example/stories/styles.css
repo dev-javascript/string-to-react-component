@@ -1,0 +1,7 @@
+pre > span.token.tag:nth-last-child(3),
+pre > span.token.punctuation:nth-last-child(2) {
+  display: none;
+}
+main > footer {
+  display: none !important;
+}

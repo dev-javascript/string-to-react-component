@@ -1,7 +1,7 @@
-import {terser} from 'rollup-plugin-terser';
-import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
 const pkg = require('./package.json');
+const terser = require('@rollup/plugin-terser');
+const commonjs = require('@rollup/plugin-commonjs');
+const nodeResolve = require('@rollup/plugin-node-resolve');
 const name = pkg.name
   .split('-')
   .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
@@ -49,4 +49,4 @@ const Config = ({en, inputPath = '', outputFile = 'stringToReactComponent', pf =
     Config({en: 'dev', pf: true, ...op}),
     Config({en: 'prod', pf: true, ...op}),
   ];
-export default ConfigFactory();
+module.exports = ConfigFactory();
