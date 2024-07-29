@@ -35,6 +35,7 @@ yarn add string-to-react-component @babel/standalone
 ```js
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://unpkg.com/string-to-react-component@latest/dist/stringToReactComponent.umd.min.js"></script>
+// This will create a global function StringToReactComponent
 ```
 
 ## Basic Example

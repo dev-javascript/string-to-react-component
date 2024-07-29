@@ -1,10 +1,10 @@
 import type {TransformOptions} from '@babel/core';
 import type {TBabel, TReact, IStringToReactApi} from './types.d';
-import {FC, PropsWithChildren} from 'react';
+import {FC} from 'react';
 class Ctx implements IStringToReactApi {
   _temp: string = '';
   _parentTemp: string = `"use strict";\nreturn @temp;`;
-  _com: FC<PropsWithChildren<{}>> = function () {
+  _com: FC = function () {
     return null;
   };
   _getBabel: () => TBabel;
@@ -14,7 +14,7 @@ class Ctx implements IStringToReactApi {
     }
     if (!Babel) {
       throw new Error(
-        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires "^7.23.10" )`,
+        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires ">=7.6.3" )`,
       );
     }
     this._getBabel = () => Babel;
@@ -71,7 +71,7 @@ class Ctx implements IStringToReactApi {
     }
     return this;
   }
-  getComponent(): FC<PropsWithChildren<{}>> {
+  getComponent(): FC {
     return this._com;
   }
 }

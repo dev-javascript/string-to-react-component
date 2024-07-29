@@ -14,7 +14,7 @@ describe('constructor :', () => {
       new Ctx(React, undefined);
     } catch (er) {
       expect(er.message).toBe(
-        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires "^7.23.10" )`,
+        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires ">=7.6.3" )`,
       );
     }
   });
@@ -134,6 +134,6 @@ describe('methods : ', () => {
     const ins = new Ctx(React, Babel);
     ins._temp = `()=><div>2</div>`;
     const code = ins._transpile({filename: 'counter.ts'});
-    expect(code).toBe('() => /*#__PURE__*/React.createElement("div", null, "2");\n//# sourceURL=counter.ts');
+    expect(code).toBe('() => React.createElement("div", null, "2");\n//# sourceURL=counter.ts');
   });
 });
