@@ -1,3 +1,9 @@
+## version 3.1.1
+
+- Update dependencies
+
+- Provide Online Examples
+
 ## version 3.1.0
 
 - Adding `@babel/standalone` package into `peerDependencies` list
