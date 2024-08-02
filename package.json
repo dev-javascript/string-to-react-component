@@ -19,8 +19,8 @@
     "email": "javascript.code.dev@gmail.com"
   },
   "types": "./index.d.ts",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dev-javascript/string-to-react-component.git"
@@ -61,7 +61,7 @@
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@babel/runtime-corejs3": "^7.25.0",
-    "@babel/standalone": "7.6.3",
+    "@babel/standalone": "^7.25.2",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
