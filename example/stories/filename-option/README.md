@@ -3,10 +3,9 @@ import StringToReactComponent from 'string-to-react-component';
 
 function App() {
   return (
-    <StringToReactComponent babelOptions={{filename: 'counter.js', sourceMaps: 'inline'}}>
+    <StringToReactComponent babelOptions={{filename: 'counter.js'}}>
       {`(props)=>{
-           const {useState}=React;
-           const [counter,setCounter]=useState(0);
+           const [counter,setCounter]=React.useState(0);
            const increase=()=>{
              setCounter(counter+1);
            };

@@ -4,9 +4,9 @@ function App() {
   return (
     <StringToReactComponent>
       {`(props)=>{
-         const {useState}=React; // React can be used as a global variable
-         const [counter,setCounter]=useState(0);
+         const [counter,setCounter]=React.useState(0);
          const increase=()=>{
+          
            setCounter(counter+1);
          };
          return (<>

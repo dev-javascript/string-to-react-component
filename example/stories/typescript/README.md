@@ -5,9 +5,10 @@ function App() {
   return (
     <StringToReactComponent
       babelOptions={{filename: 'counter.ts', presets: [['typescript', {allExtensions: true, isTSX: true}]]}}>
-      {`()=>{
+      {`(props)=>{
         const [counter,setCounter]=React.useState<number>(0);
         const increase=()=>{
+          
           setCounter(counter+1);
         };
         return (<>

@@ -32,26 +32,11 @@ module.exports = {
   require: [path.join(__dirname, './example/stories/styles.css')],
   // assetsDir: "example/stories/assets",
   sections: [
-    {
-      name: 'Minimal Usage',
-      content: 'example/stories/usage/README.md',
-      sectionDepth: 1,
-    },
-    {
-      name: 'data prop',
-      content: 'example/stories/data-prop/README.md',
-      sectionDepth: 1,
-    },
-    {
-      name: 'Using source map',
-      content: 'example/stories/source-map/README.md',
-      sectionDepth: 1,
-    },
-    {
-      name: 'Using Typescript',
-      content: 'example/stories/typescript/README.md',
-      sectionDepth: 1,
-    },
+    {name: 'Minimal Usage', content: 'example/stories/usage/README.md', sectionDepth: 1},
+    {name: 'Using useState, useEffect and ...', content: 'example/stories/using-useState-useEffect/README.md'},
+    {name: 'Using Unknown Elements', content: 'example/stories/using-unkown-elements/README.md', sectionDepth: 1},
+    {name: 'filename option', content: 'example/stories/filename-option/README.md', sectionDepth: 1},
+    {name: 'Using Typescript', content: 'example/stories/typescript/README.md', sectionDepth: 1},
   ],
   styleguideComponents: {},
   pagePerSection: true,

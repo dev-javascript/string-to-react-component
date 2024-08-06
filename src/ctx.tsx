@@ -8,10 +8,9 @@ class Ctx implements IStringToReactApi {
     return null;
   };
   _getBabel: () => TBabel;
+  _getReact: () => TReact;
   constructor(React: TReact, Babel: TBabel) {
-    if (typeof window === 'object') {
-      window.React = window.React || React;
-    }
+    this._getReact = () => React;
     if (!Babel) {
       throw new Error(
         `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires ">=7.6.3" )`,
@@ -19,10 +18,17 @@ class Ctx implements IStringToReactApi {
     }
     this._getBabel = () => Babel;
   }
+  _getBabelDefaultOptions(): TransformOptions {
+    return {
+      sourceMaps: 'inline',
+      sourceType: 'module',
+    };
+  }
   _checkBabelOptions(babelOptions: TransformOptions) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {
       throw new Error(`babelOptions prop of string-to-react-component element should be an object.`);
     }
+    Object.assign(babelOptions, this._getBabelDefaultOptions(), babelOptions);
     if (Object.prototype.hasOwnProperty.call(babelOptions, 'presets') === false) {
       babelOptions.presets = ['react'];
     } else {
@@ -34,6 +40,37 @@ class Ctx implements IStringToReactApi {
         babelOptions.presets.push('react');
       }
     }
+  }
+  getModule(code: string): Promise<any> {
+    code = `import React from "react";\nexport default ${code}`;
+    const op: TransformOptions = {
+      presets: ['react', ['env', {modules: false}]],
+      filename: 'counter.js',
+      sourceMaps: 'inline',
+      sourceType: 'module',
+    };
+    const resultObj = this._getBabel().transform(code, op);
+    // 1. Define your module code as a string
+    code = resultObj.code || '';
+    code = code
+      .replace('export default', 'export default (React)=>')
+      .replace('import React from "react";', '//import React from "react";');
+
+    // 2. Create a Blob containing the module code
+    const blob = new Blob([code], {type: 'application/javascript'});
+    // 3. Create a URL for the Blob
+    const moduleUrl = URL.createObjectURL(blob);
+    // 4. Dynamically import the module using import()
+    return import(/* webpackIgnore: true */ moduleUrl)
+      .then((module) => {
+        // Clean up by revoking the object URL
+        URL.revokeObjectURL(moduleUrl);
+
+        return Promise.resolve((module?.default || module)(this._getReact()));
+      })
+      .catch((error) => {
+        console.error('Error loading module:', error);
+      });
   }
   _transpile(babelOptions: TransformOptions): string {
     // make sure react presets is registered in babelOptions

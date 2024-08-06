@@ -17,7 +17,7 @@ module.exports = (env) => {
       umdNamedDefine: true,
     },
     devtool: isProduction ? 'source-map' : 'inline-source-map',
-    mode: env,
+    mode: 'development',
     module: {
       rules: [
         {
