@@ -8,16 +8,18 @@ function StringToReactComponent(
   let ref = useRef<any>(null);
   ref.current = ref.current || getCtx(react, Babel);
   const api = ref.current as IStringToReactApi;
-  //const babelOptions = props.babelOptions || {};
-  //const GeneratedComponent = api.updateTemplate(props.children || '', babelOptions).getComponent();
+  const babelOptions = props.babelOptions || {};
+  const stringCode = props.children || '() => null';
   const data = props.data || {};
+  //const GeneratedComponent = api.updateTemplate(props.children || '', babelOptions).getComponent();
+
   //
   const ModuleComponent = useCallback(
     (data: any) => {
-      const ref = useRef<{Com: FC<any>}>({Com: (props) => <p>hhhhhhhhhhhhhhhhhh</p>});
+      const ref = useRef<{Com: FC<any>}>({Com: () => <p>Loading...</p>});
       const [, rerender] = useState<object>({});
       useEffect(() => {
-        api.getModule(props.children).then((Mod: FC) => {
+        api.getModule(stringCode, babelOptions).then((Mod: FC) => {
           ref.current.Com = Mod;
           rerender({});
         });
@@ -25,7 +27,7 @@ function StringToReactComponent(
       const Com = ref.current.Com;
       return <Com {...data} />;
     },
-    [props.children],
+    [stringCode, babelOptions],
   );
   return <ModuleComponent {...data} />;
 }

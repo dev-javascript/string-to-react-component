@@ -41,15 +41,10 @@ class Ctx implements IStringToReactApi {
       }
     }
   }
-  getModule(code: string): Promise<any> {
+  getModule(code: string, babelOptions: TransformOptions): Promise<any> {
+    this._checkBabelOptions(babelOptions);
     code = `import React from "react";\nexport default ${code}`;
-    const op: TransformOptions = {
-      presets: ['react', ['env', {modules: false}]],
-      filename: 'counter.js',
-      sourceMaps: 'inline',
-      sourceType: 'module',
-    };
-    const resultObj = this._getBabel().transform(code, op);
+    const resultObj = this._getBabel().transform(code, babelOptions);
     // 1. Define your module code as a string
     code = resultObj.code || '';
     code = code
