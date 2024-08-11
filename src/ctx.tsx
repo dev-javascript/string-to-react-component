@@ -18,17 +18,10 @@ class Ctx implements IStringToReactApi {
     }
     this._getBabel = () => Babel;
   }
-  _getBabelDefaultOptions(): TransformOptions {
-    return {
-      sourceMaps: 'inline',
-      sourceType: 'module',
-    };
-  }
   _checkBabelOptions(babelOptions: TransformOptions) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {
       throw new Error(`babelOptions prop of string-to-react-component element should be an object.`);
     }
-    Object.assign(babelOptions, this._getBabelDefaultOptions(), babelOptions);
     if (Object.prototype.hasOwnProperty.call(babelOptions, 'presets') === false) {
       babelOptions.presets = ['react'];
     } else {
