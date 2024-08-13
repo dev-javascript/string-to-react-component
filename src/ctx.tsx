@@ -3,13 +3,15 @@ import type {TBabel, TReact, IStringToReactApi} from './types.d';
 import {FC} from 'react';
 class Ctx implements IStringToReactApi {
   _temp: string = '';
-  _parentTemp: string = `"use strict";\nreturn @temp;`;
+  _blob: Blob | undefined = undefined;
+  _rerender: (state: {}) => void = () => {};
   _com: FC = function () {
     return null;
   };
   _getBabel: () => TBabel;
   _getReact: () => TReact;
-  constructor(React: TReact, Babel: TBabel) {
+  constructor(React: TReact, Babel: TBabel, rerender: (state: {}) => void) {
+    this._rerender = rerender;
     this._getReact = () => React;
     if (!Babel) {
       throw new Error(
@@ -21,6 +23,9 @@ class Ctx implements IStringToReactApi {
   _checkBabelOptions(babelOptions: TransformOptions) {
     if (Object.prototype.toString.call(babelOptions) !== '[object Object]') {
       throw new Error(`babelOptions prop of string-to-react-component element should be an object.`);
+    }
+    if (Object.prototype.hasOwnProperty.call(babelOptions, 'sourceMaps') === false) {
+      babelOptions.sourceMaps = 'inline';
     }
     if (Object.prototype.hasOwnProperty.call(babelOptions, 'presets') === false) {
       babelOptions.presets = ['react'];
@@ -34,49 +39,44 @@ class Ctx implements IStringToReactApi {
       }
     }
   }
-  getModule(code: string, babelOptions: TransformOptions): Promise<any> {
-    this._checkBabelOptions(babelOptions);
-    code = `import React from "react";\nexport default ${code}`;
-    const resultObj = this._getBabel().transform(code, babelOptions);
-    // 1. Define your module code as a string
-    code = resultObj.code || '';
-    code = code
+  _prependCode(template: string): IStringToReactApi {
+    this._temp = `import React from "react";\nexport default ${template}`;
+    return this;
+  }
+  _postpendCode(): string {
+    return this._temp
       .replace('export default', 'export default (React)=>')
       .replace('import React from "react";', '//import React from "react";');
-
-    // 2. Create a Blob containing the module code
-    const blob = new Blob([code], {type: 'application/javascript'});
-    // 3. Create a URL for the Blob
+  }
+  _getBlob(temp: string): Blob {
+    return new Blob([temp], {type: 'application/javascript'});
+  }
+  _getModule(blob: Blob): Promise<FC> {
     const moduleUrl = URL.createObjectURL(blob);
-    // 4. Dynamically import the module using import()
     return import(/* webpackIgnore: true */ moduleUrl)
       .then((module) => {
-        // Clean up by revoking the object URL
         URL.revokeObjectURL(moduleUrl);
-
         return Promise.resolve((module?.default || module)(this._getReact()));
       })
       .catch((error) => {
-        console.error('Error loading module:', error);
+        URL.revokeObjectURL(moduleUrl);
+        const errorTitle: string = 'string-to-react-component loading module is failed:';
+        console.error(errorTitle, error);
+        throw new Error(errorTitle);
       });
   }
-  _transpile(babelOptions: TransformOptions): string {
-    // make sure react presets is registered in babelOptions
+  _transpile(babelOptions: TransformOptions): IStringToReactApi {
     this._checkBabelOptions(babelOptions);
     const resultObj = this._getBabel().transform(this._temp, babelOptions);
-    const filename = babelOptions.filename;
     let code = resultObj.code;
-    if (filename) {
-      code = resultObj.code + `\n//# sourceURL=${filename}`;
-    }
-    return code || 'null';
+    // if (babelOptions.filename) {
+    //   code = resultObj.code + `\n//# sourceURL=${babelOptions.filename}`;
+    // }
+    this._temp = code || 'null';
+    return this;
   }
-  _generateCom(babelOptions: any) {
-    this._com = Function(this._parentTemp.replace('@temp', this._transpile(babelOptions)))();
-    this._validateCodeInsideTheTemp();
-  }
-  _validateCodeInsideTheTemp() {
-    if (typeof this._com !== 'function') {
+  _validateCodeInsideTheTemp(com: any): void {
+    if (typeof com !== 'function') {
       throw new Error(`code inside the passed string into string-to-react-component, should be a function`);
     }
   }
@@ -88,13 +88,26 @@ class Ctx implements IStringToReactApi {
       throw new Error(`passed string into string-to-react-component element can not be empty`);
     }
   }
-  updateTemplate(template: string, babelOptions: TransformOptions): IStringToReactApi {
-    this._validateTemplate(template);
+  /** update transpiled code */
+  _updateTemplate(template: string, babelOptions: TransformOptions): string {
     if (template !== this._temp) {
-      this._temp = template;
-      this._generateCom(babelOptions);
+      this._validateTemplate(template);
+      return this._prependCode(template)._transpile(babelOptions)._postpendCode();
     }
-    return this;
+    return this._temp;
+  }
+  update(template: string, babelOptions: TransformOptions): void {
+    this._updateComponent(this._updateTemplate(template, babelOptions), babelOptions);
+  }
+  _onChangeComponent(): void {
+    this._rerender({});
+  }
+  _updateComponent(template: string, babelOptions: TransformOptions): void {
+    this._getModule(this._getBlob(template)).then((com: FC) => {
+      this._validateCodeInsideTheTemp(com);
+      this._com = com;
+      this._onChangeComponent();
+    });
   }
   getComponent(): FC {
     return this._com;

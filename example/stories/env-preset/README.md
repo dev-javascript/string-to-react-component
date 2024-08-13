@@ -2,9 +2,9 @@
 import StringToReactComponent from 'string-to-react-component';
 function App() {
   return (
-    <StringToReactComponent>
+    <StringToReactComponent babelOptions={{presets: ['react', ['env', {modules: false}]]}}>
       {`(props)=>{
-         const [counter,setCounter]=React.useState(0);//by default React object is emmbed into your string code
+         const [counter,setCounter]=React.useState(0);
          const increase=()=>{
            setCounter(counter+1);
          };

@@ -4,7 +4,7 @@ import { TransformOptions } from "@babel/core";
 import React, { FunctionComponent, FC, PropsWithChildren } from 'react';
 import { TransformOptions } from "@babel/core";
 export interface IStringToReactApi {
-    updateTemplate: (template: string, babelOptions: TransformOptions) => IStringToReactApi;
+    update: (template: string, babelOptions: TransformOptions) => void;
     getComponent: () => FC<PropsWithChildren<{}>>;
     [x: string]: any;
 }

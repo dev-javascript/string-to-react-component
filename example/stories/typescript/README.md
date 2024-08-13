@@ -4,11 +4,10 @@ import StringToReactComponent from 'string-to-react-component';
 function App() {
   return (
     <StringToReactComponent
-      babelOptions={{filename: 'counter.ts', presets: [['typescript', {allExtensions: true, isTSX: true}]]}}>
-      {`(props)=>{
+      babelOptions={{filename: 'counter.ts', presets: ['react', ['typescript', {allExtensions: true, isTSX: true}]]}}>
+      {`function (props:any):React.ReactElement{
         const [counter,setCounter]=React.useState<number>(0);
         const increase=()=>{
-          
           setCounter(counter+1);
         };
         return (<>

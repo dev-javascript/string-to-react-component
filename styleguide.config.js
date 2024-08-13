@@ -33,10 +33,11 @@ module.exports = {
   // assetsDir: "example/stories/assets",
   sections: [
     {name: 'Minimal Usage', content: 'example/stories/usage/README.md', sectionDepth: 1},
-    {name: 'Using useState, useEffect and ...', content: 'example/stories/using-useState-useEffect/README.md'},
     {name: 'Using Unknown Elements', content: 'example/stories/using-unkown-elements/README.md', sectionDepth: 1},
+    {name: 'Using React Hooks', content: 'example/stories/using-react-hooks/README.md'},
     {name: 'filename option', content: 'example/stories/filename-option/README.md', sectionDepth: 1},
     {name: 'Using Typescript', content: 'example/stories/typescript/README.md', sectionDepth: 1},
+    {name: 'Using env preset', content: 'example/stories/env-preset/README.md', sectionDepth: 1},
   ],
   styleguideComponents: {},
   pagePerSection: true,
