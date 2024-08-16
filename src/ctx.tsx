@@ -97,6 +97,9 @@ class Ctx implements IStringToReactApi {
     return this._temp;
   }
   update(template: string, babelOptions: TransformOptions): void {
+    this._update(template, babelOptions);
+  }
+  _update(template: string, babelOptions: TransformOptions): void {
     this._updateComponent(this._updateTemplate(template, babelOptions), babelOptions);
   }
   _onChangeComponent(): void {
