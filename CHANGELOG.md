@@ -1,3 +1,19 @@
+## version 4.0.0
+
+- Fix source map issue
+
+- Fix next js issue
+
+- default sourceMaps value is `inline`
+
+- Now string code can be empty
+
+- Improve error handling
+
+- Remove global `React` variable
+
+- Change version of `@babel/standalone`
+
 ## version 3.1.1
 
 - Update dependencies

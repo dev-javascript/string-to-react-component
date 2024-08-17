@@ -1,6 +1,6 @@
 {
   "name": "string-to-react-component",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "private": false,
   "description": "Create React component from string",
   "keywords": [
