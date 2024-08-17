@@ -19,8 +19,8 @@
     "email": "javascript.code.dev@gmail.com"
   },
   "types": "./index.d.ts",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dev-javascript/string-to-react-component.git"
