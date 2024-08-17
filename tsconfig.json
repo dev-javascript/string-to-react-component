@@ -26,8 +26,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"],
+  "include": ["src", "__test__/ctx.test.js", "__test__/stringToReact.test.js", "__test__/mock-module.js"],
+  "exclude": ["node_modules"]
 }

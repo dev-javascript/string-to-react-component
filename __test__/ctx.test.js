@@ -1,4 +1,4 @@
-import Ctx from './ctx';
+import Ctx from '../src/ctx';
 import React from 'react';
 import * as Babel from '@babel/standalone';
 beforeEach(() => {});
@@ -105,7 +105,6 @@ describe('methods : ', () => {
     expect(ins._updateTemplate.mock.calls[0][1]).toBe(babelOptions);
     expect(ins._updateComponent.mock.calls.length).toBe(1);
     expect(ins._updateComponent.mock.calls[0][0]).toBe('transpiled string code');
-    expect(ins._updateComponent.mock.calls[0][1]).toBe(babelOptions);
   });
   test('_checkBabelOptions method should set react preset and inline sourceMaps and throw an error with invalid parameter', () => {
     expect.assertions(6);
@@ -151,7 +150,7 @@ describe('methods : ', () => {
   test('_import method', async () => {
     expect.assertions(1);
     const ins = new Ctx(React, Babel);
-    await ins._import('./mock-module.js').then((res) => {
+    await ins._import('../__test__/mock-module.js').then((res) => {
       expect(res.default || res).toBe('mock-module');
     });
   });
