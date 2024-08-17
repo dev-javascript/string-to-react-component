@@ -15,7 +15,7 @@ class Ctx implements IStringToReactApi {
     this._getReact = () => React;
     if (!Babel) {
       throw new Error(
-        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires ">=7.6.3" )`,
+        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires ">=7.15.8" )`,
       );
     }
     this._getBabel = () => Babel;

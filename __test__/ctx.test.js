@@ -14,7 +14,7 @@ describe('constructor :', () => {
       new Ctx(React, undefined);
     } catch (er) {
       expect(er.message).toBe(
-        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires ">=7.6.3" )`,
+        `Package "string-to-react-component" has a missing peer dependency of "@babel/standalone" ( requires ">=7.15.8" )`,
       );
     }
   });
