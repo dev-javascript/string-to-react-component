@@ -1,8 +1,21 @@
 /*
+	object-assign
+	(c) Sindre Sorhus
+	@license MIT
+	*/
+
+/*
 object-assign
 (c) Sindre Sorhus
 @license MIT
 */
+
+/*!
+	   * The buffer module from node.js, for the browser.
+	   *
+	   * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+	   * @license  MIT
+	   */
 
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
