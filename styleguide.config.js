@@ -34,6 +34,7 @@ module.exports = {
   sections: [
     {name: 'Minimal Usage', content: 'example/stories/usage/README.md', sectionDepth: 1},
     {name: 'Using Unknown Elements', content: 'example/stories/using-unkown-elements/README.md', sectionDepth: 1},
+    {name: 'data prop', content: 'example/stories/data-prop/README.md', sectionDepth: 1},
     {name: 'Using React Hooks', content: 'example/stories/using-react-hooks/README.md'},
     {name: 'filename option', content: 'example/stories/filename-option/README.md', sectionDepth: 1},
     {name: 'Using Typescript', content: 'example/stories/typescript/README.md', sectionDepth: 1},

@@ -50,8 +50,7 @@ function App() {
   return (
     <StringToReactComponent>
       {`(props)=>{
-         const {useState}=React;
-         const [counter,setCounter]=useState(0);
+         const [counter,setCounter]=React.useState(0); // by default your code has access to the React object
          const increase=()=>{
            setCounter(counter+1);
          };
@@ -69,25 +68,25 @@ function App() {
 
 - The given code inside the string should be a function.
 
-- The code inside the string is executed in the global scope, so imported objects from `react` package including `useState`, `useEffect`, ... are not accessible inside it and you can get them from `React` global variable or pass them as props to the component :
+- The code inside the string has access to the `React` object and for using `useState`, `useEffect`, `useRef` and ... you should get them from `React` object or pass them as `data` prop to the component:
 
-```js
-import {useState} from 'react';
-import StringToReactComponent from 'string-to-react-component';
-function App() {
-  return (
-    <StringToReactComponent data={{useState}}>
-      {`(props)=>{
-         console.log(typeof useState); // undefined
-         console.log(typeof React.useState); // function
-         console.log(typeof props.useState); // function
-         ...
-
-       }`}
-    </StringToReactComponent>
-  );
-}
-```
+  ```js
+  import {useState} from 'react';
+  import StringToReactComponent from 'string-to-react-component';
+  function App() {
+    return (
+      <StringToReactComponent data={{useState}}>
+        {`(props)=>{
+           console.log(typeof useState); // undefined
+           console.log(typeof React.useState); // function
+           console.log(typeof props.useState); // function
+           ...
+  
+         }`}
+      </StringToReactComponent>
+    );
+  }
+  ```
 
 ## Using Unknown Elements
 
@@ -114,36 +113,43 @@ function App() {
 
 ### data
 
-- type : object
-- not required
+- type : `object`
+- required : `No`
 - `data` object is passed to the component(which is generated from the string) as props
+- example :
+
+  ```js
+  import {useState} from 'react';
+  import StringToReactComponent from 'string-to-react-component';
+  function App() {
+    const [counter, setCounter] = useState(0);
+    const increase = () => {
+      setCounter(counter + 1);
+    };
+    return (
+      <StringToReactComponent data={{counter, increase}}>
+        {`(props)=>{
+           return (<>
+             <button onClick={props.increase}>+</button>
+             <span>{'counter : '+ props.counter}</span>
+             </>);
+         }`}
+      </StringToReactComponent>
+    );
+  }
+  ```
 
 ### babelOptions
 
-- type : object
-- not required
+- type : `object`
+- required : `No`
+- default value : `{presets: ["react"],sourceMaps: "inline"}`
 - See the full option list [here](https://babeljs.io/docs/en/options)
 - examples :
-  - using source map :
-    ```js
-    <StringToReactComponent babelOptions={{filename: 'counter.js', sourceMaps: 'inline'}}>
-      {`(props)=>{
-         const {useState}=React;
-         const [counter,setCounter]=useState(0);
-         const increase=()=>{
-           setCounter(counter+1);
-         };
-         return (<>
-           <button onClick={increase}>+</button>
-           <span>{'counter : '+ counter}</span>
-           </>);
-       }`}
-    </StringToReactComponent>
-    ```
   - using typescript :
     ```js
     <StringToReactComponent
-      babelOptions={{filename: 'counter.ts', presets: [['typescript', {allExtensions: true, isTSX: true}]]}}>
+      babelOptions={{filename: 'counter.ts', presets: ['react', ['typescript', {allExtensions: true, isTSX: true}]]}}>
       {`()=>{
          const [counter,setCounter]=React.useState<number>(0);
          const increase=()=>{
