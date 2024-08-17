@@ -51,9 +51,12 @@ class Ctx implements IStringToReactApi {
   _getBlob(temp: string): Blob {
     return new Blob([temp], {type: 'application/javascript'});
   }
+  _import(url: string): Promise<any> {
+    return import(/* webpackIgnore: true */ url);
+  }
   _getModule(blob: Blob): Promise<FC> {
     const moduleUrl = URL.createObjectURL(blob);
-    return import(/* webpackIgnore: true */ moduleUrl)
+    return this._import(moduleUrl)
       .then((module) => {
         URL.revokeObjectURL(moduleUrl);
         return Promise.resolve((module?.default || module)(this._getReact()));
@@ -90,22 +93,19 @@ class Ctx implements IStringToReactApi {
   }
   /** update transpiled code */
   _updateTemplate(template: string, babelOptions: TransformOptions): string {
-    if (template !== this._temp) {
-      this._validateTemplate(template);
-      return this._prependCode(template)._transpile(babelOptions)._postpendCode();
-    }
-    return this._temp;
+    this._validateTemplate(template);
+    return this._prependCode(template)._transpile(babelOptions)._postpendCode();
   }
   update(template: string, babelOptions: TransformOptions): void {
     this._update(template, babelOptions);
   }
   _update(template: string, babelOptions: TransformOptions): void {
-    this._updateComponent(this._updateTemplate(template, babelOptions), babelOptions);
+    this._updateComponent(this._updateTemplate(template, babelOptions));
   }
   _onChangeComponent(): void {
     this._rerender({});
   }
-  _updateComponent(template: string, babelOptions: TransformOptions): void {
+  _updateComponent(template: string): void {
     this._getModule(this._getBlob(template)).then((com: FC) => {
       this._validateCodeInsideTheTemp(com);
       this._com = com;

@@ -58,7 +58,7 @@ describe('calling update method : ', () => {
         return _ctx2;
       };
     const babelOp = {};
-    renderApp(str, babelOp, {getCtx, react, Babel}, true, str);
+    renderApp(str, babelOp, {getCtx, react, Babel}, true, str, babelOp);
     expect(_ctx.update.mock.calls.length).toBe(1);
     expect(_ctx.update.mock.calls[0][0]).toBe(str);
     expect(_ctx.update.mock.calls[0][1]).toEqual(babelOp);
