@@ -1,6 +1,6 @@
 {
   "name": "string-to-react-component",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": false,
   "description": "Dynamically create and render React components from strings at runtime, converting strings to React components for flexible UI generation.",
   "keywords": [

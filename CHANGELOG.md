@@ -1,3 +1,7 @@
+## version 4.0.1
+
+Improve documentation
+
 ## version 4.0.0
 
 - Fix source map issue
