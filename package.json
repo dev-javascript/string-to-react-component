@@ -2,17 +2,22 @@
   "name": "string-to-react-component",
   "version": "4.0.0",
   "private": false,
-  "description": "Create React component from string",
+  "description": "Dynamically create and render React components from strings at runtime, converting strings to React components for flexible UI generation.",
   "keywords": [
     "react",
     "component",
+    "string-to-react",
+    "convert-string-to-react",
+    "render-react-from-string",
+    "react-parser",
     "string",
     "element",
     "jsx",
+    "string-to-jsx",
     "converter",
     "parser",
-    "string-to-react",
-    "convert-string-to-react-component"
+    "dynamic-components",
+    "runtime-components"
   ],
   "author": {
     "name": "dev-javascript",
